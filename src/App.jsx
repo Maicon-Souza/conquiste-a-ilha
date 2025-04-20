@@ -24,9 +24,19 @@ export default function App() {
 
   return (
     <div className="bg-blue-900 min-h-screen p-10 relative overflow-hidden">
-      {/* Elementos decorativos */}
-      <img src={polvo} alt="Polvo" className="absolute top-10 left-10 w-32 h-32 z-0" />
-      <img src={ancora} alt="Âncora" className="absolute top-10 right-10 w-32 h-32 z-0" />
+      {/* Elementos decorativos - Polvo maior no canto superior direito */}
+      <img 
+        src={polvo} 
+        alt="Polvo" 
+        className="absolute top-5 right-5 w-40 h-40 z-0" 
+      />
+      
+      {/* Âncora maior no canto inferior esquerdo */}
+      <img 
+        src={ancora} 
+        alt="Âncora" 
+        className="absolute bottom-5 left-5 w-40 h-40 z-0" 
+      />
 
       {/* Título principal */}
       <h1 className="text-center text-5xl font-bold text-white mb-16 relative z-10">
@@ -41,11 +51,6 @@ export default function App() {
 
           return (
             <div key={idx} className="relative h-40">
-              {/* Nome do navio - agora acima da área de progresso */}
-              <span className="absolute -top-8 left-0 w-full text-center font-bold text-3xl text-white uppercase tracking-wider mb-2">
-                {barco.nome}
-              </span>
-
               {/* Ondas */}
               <div
                 className="absolute bottom-0 left-0 h-24 flex transition-all duration-700 ease-in-out"
@@ -58,15 +63,15 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Navio animado - ajustado para flutuar sobre as ondas */}
+              {/* Navio animado */}
               <div
                 className="absolute z-10 transition-all duration-700 ease-in-out"
                 style={{
                   left: `${ondaTotal - 85}px`,
-                  bottom: "20px", // Ajustado para ficar sobre as ondas
+                  bottom: "20px",
                   width: "120px",
                   height: "120px",
-                  transform: 'translateY(-15px)' // Efeito de flutuação mais pronunciado
+                  transform: 'translateY(-15px)'
                 }}
               >
                 <Lottie animationData={animacoesNavios[barco.nome]} loop={true} />
@@ -76,6 +81,11 @@ export default function App() {
               <div className="absolute right-0 bottom-2 z-20" style={{ width: "150px", height: "150px" }}>
                 <img src={ilha} alt="Ilha" className="w-full h-full object-contain" />
               </div>
+
+              {/* Nome do navio - agora embaixo no começo das ondas */}
+              <span className="absolute bottom-2 left-0 font-bold text-2xl text-white uppercase tracking-wider">
+                {barco.nome}
+              </span>
             </div>
           );
         })}
