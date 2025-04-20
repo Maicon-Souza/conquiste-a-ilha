@@ -1,7 +1,28 @@
 /* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
 #root {
   max-width: 100%;
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+
+.titulo-pirata {
+  font-family: 'Pirata One', cursive;
+  font-size: 3.5rem;
+  letter-spacing: 3px;
+  color: #f8f8f8;
+  text-shadow: 3px 3px 0 #8b4513, 
+               5px 5px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+  line-height: 1.2;
+}
+
+.nome-barco {
+  font-family: sans-serif; /* Fonte padrão do sistema */
+  font-weight: bold;
+  text-transform: uppercase;
 }
