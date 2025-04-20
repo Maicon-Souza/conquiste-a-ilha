@@ -1,9 +1,9 @@
 [
-  { "nome": "HOLANDÊS VOADOR", "pontos": 50 },
-  { "nome": "PÉROLA NEGRA", "pontos": 60 },
-  { "nome": "PIRATAS DO CARIBE", "pontos": 100 },
-  { "nome": "NAVIO FANTASMA", "pontos": 40 },
+  { "nome": "HOLANDÊS VOADOR", "pontos": 150 },
+  { "nome": "PÉROLA NEGRA", "pontos": 80 },
+  { "nome": "PIRATAS DO CARIBE", "pontos": 160 },
+  { "nome": "NAVIO FANTASMA", "pontos": 60 },
   { "nome": "SEREIA DO MAR", "pontos": 70 },
-  { "nome": "TUBARÃO BRANCO", "pontos": 20 },
+  { "nome": "TUBARÃO BRANCO", "pontos": 70 },
   { "nome": "CORSÁRIO NEGRO", "pontos": 55 }
 ]

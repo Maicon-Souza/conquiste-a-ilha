@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Lottie from "lottie-react";
 import ondaAnimation from "./assets/ondas.json";
 import navio1 from "./assets/navio1.json";
@@ -25,14 +25,30 @@ const animacoesNavios = {
 };
 
 export default function App() {
-  const [pontuacoes, setPontuacoes] = useState([]);
+  const [animatedPontuacoes, setAnimatedPontuacoes] = useState([]);
+  const ondaLargura = 85;
+  const maxOndas = 7;
+  const animationRef = useRef(null);
 
   useEffect(() => {
-    setPontuacoes(pontuacoesJson.slice(0, 7));
+    // Inicia com valores zerados para animação
+    setAnimatedPontuacoes(pontuacoesJson.slice(0, 7).map(b => ({ ...b, pontos: 0 })));
+    
+    // Dispara a animação após um pequeno delay
+    animationRef.current = setTimeout(() => {
+      setAnimatedPontuacoes(pontuacoesJson.slice(0, 7));
+    }, 300);
+    
+    return () => clearTimeout(animationRef.current);
   }, []);
+
+  const calcularLargura = (pontos) => {
+    return Math.floor((pontos / 100) * maxOndas) * ondaLargura;
+  };
 
   return (
     <div className="bg-blue-900 min-h-screen p-5 relative overflow-hidden">
+      {/* Elementos decorativos */}
       <img 
         src={ancora} 
         alt="Âncora" 
@@ -44,31 +60,40 @@ export default function App() {
         className="absolute top-2 right-4 w-28 h-28 z-0" 
       />
 
+      {/* Título principal */}
       <h1 className="titulo-pirata text-center">
         CONQUISTE A ILHA
       </h1>
 
+      {/* Container das equipes */}
       <div className="space-y-8 relative z-10">
-        {pontuacoes.map((barco, idx) => {
-          const ondaLargura = 85;
-          const numOndas = Math.floor((barco.pontos / 100) * 7);
-          const ondaTotal = ondaLargura * numOndas;
+        {animatedPontuacoes.map((barco, idx) => {
+          const ondaTotal = calcularLargura(barco.pontos);
+          const numOndas = Math.ceil(ondaTotal / ondaLargura);
 
           return (
             <div key={idx} className="relative h-32">
+              {/* Barra de progresso animada */}
               <div
-                className="absolute bottom-6 left-0 h-18 flex transition-all duration-700 ease-in-out"
+                className="absolute bottom-6 left-0 h-18 flex barra-progresso"
                 style={{ width: `${ondaTotal}px` }}
               >
                 {Array.from({ length: numOndas }).map((_, i) => (
-                  <div key={i} style={{ width: `${ondaLargura}px` }}>
+                  <div 
+                    key={i} 
+                    style={{ 
+                      width: `${ondaLargura}px`,
+                      flexShrink: 0
+                    }}
+                  >
                     <Lottie animationData={ondaAnimation} loop={true} />
                   </div>
                 ))}
               </div>
 
+              {/* Navio animado - agora com a mesma transição das ondas */}
               <div
-                className="absolute z-10 transition-all duration-700 ease-in-out"
+                className="absolute z-10 barco-animado"
                 style={{
                   left: `${ondaTotal - 80}px`,
                   bottom: "30px",
@@ -80,6 +105,7 @@ export default function App() {
                 <Lottie animationData={animacoesNavios[barco.nome]} loop={true} />
               </div>
 
+              {/* Ilha */}
               <div 
                 className="absolute right-0 bottom-1 z-20" 
                 style={{ width: "125px", height: "125px" }}
@@ -87,6 +113,7 @@ export default function App() {
                 <img src={ilha} alt="Ilha" className="w-full h-full object-contain" />
               </div>
 
+              {/* Nome do navio */}
               <span className="nome-barco absolute bottom-0 left-1 text-md text-white">
                 {barco.nome}
               </span>
