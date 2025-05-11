@@ -32,3 +32,9 @@
   will-change: width, left;
   overflow: hidden;
 }
+
+/* Novo estilo para o rodapé */
+footer {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(2px);
+}

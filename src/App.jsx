@@ -12,6 +12,7 @@ import pontuacoesJson from "./pontuacao.json";
 import ilha from "./assets/ilha.png";
 import polvo from "./assets/polvo.png";
 import ancora from "./assets/ancora.png";
+import backgroundRR from "./assets/backgroundRR.png";
 import './App.css';
 
 const animacoesNavios = {
@@ -31,10 +32,7 @@ export default function App() {
   const animationRef = useRef(null);
 
   useEffect(() => {
-    // Inicia com valores zerados para animação
     setAnimatedPontuacoes(pontuacoesJson.slice(0, 7).map(b => ({ ...b, pontos: 0 })));
-    
-    // Dispara a animação após um pequeno delay
     animationRef.current = setTimeout(() => {
       setAnimatedPontuacoes(pontuacoesJson.slice(0, 7));
     }, 300);
@@ -47,7 +45,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-blue-900 min-h-screen p-5 relative overflow-hidden">
+    <div className="min-h-screen p-5 relative overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${backgroundRR})` }}>
       {/* Elementos decorativos */}
       <img 
         src={ancora} 
@@ -91,7 +89,7 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Navio animado - agora com a mesma transição das ondas */}
+              {/* Navio animado */}
               <div
                 className="absolute z-10 barco-animado"
                 style={{
@@ -108,7 +106,7 @@ export default function App() {
               {/* Ilha */}
               <div 
                 className="absolute right-0 bottom-1 z-20" 
-                style={{ width: "125px", height: "125px" }}
+                style={{ width: "150px", height: "150px" }}
               >
                 <img src={ilha} alt="Ilha" className="w-full h-full object-contain" />
               </div>
@@ -121,6 +119,13 @@ export default function App() {
           );
         })}
       </div>
+
+      {/* Rodapé novo */}
+      <footer className="fixed bottom-0 left-0 right-0 text-center py-4 z-10">
+        <p className="titulo-pirata text-xl text-white">
+          13° RR - Além das ondas
+        </p>
+      </footer>
     </div>
   );
 }
